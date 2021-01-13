@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> <%= pageTitle %> </title>
+    
+    <nav style="display: flex; flex-direction: column; margin-bottom: 1em;" >
+        <a href="/">Home</a>
+        <a href="/admin/view-books">View Books</a></li>
+    </nav>
+
+</head>
+<body>
+    
+    <form action="/admin/add-book" method="POST">
+        <div style="display: flex; flex-direction: column; width: 25vw;">
+            <label for="title">Title</label>
+            <input type="text" name="title" placeholder="Book Title" style="margin-bottom: 15px;">
+
+            <label for="pages"># of Pages</label>
+            <input type="text" name="pages" placeholder="# of pages" style="margin-bottom: 15px;">
+
+            <label for="summary">Summary</label>
+            <textarea name="summary" cols="30" rows="10" placeholder="Book Summary" style="margin-bottom: 15px;"></textarea>
+
+            <label for="genre">Genre</label>
+            <input type="text" name="genre" placeholder="Book Genre" style="margin-bottom: 15px;">
+
+            <button action="/" type="submit" method="POST">Submit</button>
+
+        </div>
+    </form>
+
+</body>
+</html>
