@@ -1,11 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+// const mongoose = require('mongoose'); 
 
 const adminData = require('./routes/admin');
 // const shopRoutes = require('./routes/shop');
 
-const port = process.env.PORT || 3000
+// const MONGODB_URI = 'mongodb+srv://hego64:s10ek0ZplgK0UByb@cluster0.cgnnu.mongodb.net/stuff';
+const PORT = process.env.PORT || 3000;
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -29,4 +31,12 @@ app.use((req, res, next) => {
     res.status(404).render('404', { pageTitle: 'Page Not Found' });
 });
 
-app.listen(port);
+app.listen(PORT);
+
+// mongoose.connect(MONGODB_URI)
+// .then(result => {
+//   app.listen(PORT);
+// })
+// .catch(err => {
+//   console.log(err);
+// });

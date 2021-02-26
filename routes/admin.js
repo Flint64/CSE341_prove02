@@ -1,6 +1,11 @@
 const path = require('path');
 const express = require('express');
 const rootDir = require('../util/path');
+const fs = require('fs');
+
+const products = require('../public/stuff');
+const ITEMS_PER_PAGE = 10;
+
 const router = express.Router();
 
 const books = [];
@@ -12,14 +17,31 @@ router.get('/add-book', (req, res, next) => {
   });
 });
 
+
+router.get('/viewData', (req, res, next) => {
+
+  const start = +req.query.start || 0;
+  const end = +req.query.end || 10;
+  const totalItems = (products.length - 1);
+  let newData = [];
+
+  newData = products.slice(start, end);
+  
+        res.render('viewData', {
+          prods: newData,
+          pageTitle: 'Data',
+          path: '/viewData',
+          totalItems: totalItems
+        });
+});
+
+
 router.get('/view-books', (req, res, next) => {
   res.render('view-books', {
     pageTitle: 'View Books',
     books: books
   });
 });
-
-
 
 // /admin/add-product => POST
 router.post('/add-book', (req, res, next) => {
