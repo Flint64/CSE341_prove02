@@ -1,0 +1,25 @@
+<div style="display: flex; align-items: center; flex-direction: column;" >
+    <h1>Pokedex!</h1>
+    <div style="border: 1px solid black; width: 20em; background-color: red; border-radius: 20px; height: 20em; ">
+        <ul id="list" style="background-color: seashell; width: 60%; margin-left: 2.5em; margin-top: 2em; height: 12em; border-radius: 10px; ">
+            <% for (let entry of pokedex.results) { %>
+            <!-- <li><a href="<%= entry.url %>"><%= entry.name %></a></li> -->
+            <li><%= entry.name %></li>
+            <% } %>
+        </ul>
+
+        <div style="display: flex; justify-content: center;" >
+            <button id="next" onclick="loadPrevious();" style="width: 8em; height: 2em; border-radius: 15px;" >
+                <- Previous
+            </button>
+
+            <button id="previous" onclick="loadNext();" style="width: 8em; height: 4em; border-radius: 15px;">
+                Next ->
+                <p style="font-size: 10px;" >(Click twice to start for some reason...)</p>
+            </button>
+        </div>
+        
+    </div>
+</div>
+
+<script src="/js/pokeAPI.js"></script>

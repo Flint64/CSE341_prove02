@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const rootDir = require('../util/path');
 const fs = require('fs');
+const fetch = require('node-fetch');
 
 const products = require('../public/stuff');
 const ITEMS_PER_PAGE = 10;
@@ -35,6 +36,25 @@ router.get('/viewData', (req, res, next) => {
         });
 });
 
+///////////////////////////////////////////////////////////////
+
+router.get('/pokeAPI', (req, res, next) => {
+
+    fetch('https://pokeapi.co/api/v2/pokemon?offset=0&limit=10')
+    .then(res => res.json())
+    .then(json => {
+      // console.log(json);
+      res.render('pokeAPI', {
+        pokedex: json
+      });
+    });
+});
+
+// router.post('/pokeAPI/next', (req, res, next) => {
+//   console.log(req.body.next);
+// });
+
+///////////////////////////////////////////////////////////////
 
 router.get('/view-books', (req, res, next) => {
   res.render('view-books', {
