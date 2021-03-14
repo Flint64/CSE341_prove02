@@ -1,0 +1,18 @@
+<ul id="avengerList">
+    <% for (let data of dummyData.avengers) { %>
+        <li><%= data.name %></li>
+    <% } %>
+</ul>
+
+<div>
+    <p style="color: crimson;" id="err"></p>
+</div>
+
+<form>
+    <label for="newName">Add Avenger</label>
+    <input type="newName" id="addAvengerID">
+    <button type="button" id="submit" onclick="addAvenger();" >Submit</button>
+</form>
+
+<script src="/js/avenger.js"></script>
+
