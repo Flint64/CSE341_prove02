@@ -12,6 +12,7 @@ const dummyData = require('../public/dummy.json');
 const router = express.Router();
 
 const books = [];
+const names = ["Ted", "Barney", "Robin", "Lily", "Marshall"];
 
 // /admin/add-product => GET
 router.get('/add-book', (req, res, next) => {
@@ -117,7 +118,50 @@ router.post('/insert', (req, res, next) => {
     })
 });
 
+///////////////////////////////////////////////////////////////
 
+const io = require('../socket');
+
+router.get('/socket', (req, res, next) => {
+  res.render('socket', {
+    names: names
+  });
+});
+
+// router.post('/add', (req, res, next) => {
+//   io.getIO.emit('')
+// });
+
+
+
+/*
+io.getIO().emit('posts', { });
+io.on('connection', socket => {
+    console.log('Client connected!')
+    socket.on('disconnect', () => {
+        console.log('Disconnected!')
+    })
+    
+    socket.on('add', name => {
+        if (!names.find(n => n == name)) {
+            names.push(name);
+            io.emit('add', names);
+            // socket.broadcast.emit('add', names);
+        }
+    });
+    
+    socket.on('remove', name => {
+        names = names.filter(index => {
+            return index != name;
+        });
+        console.log(names);
+        io.emit('remove', names);
+    });
+});
+
+ */
+
+///////////////////////////////////////////////////////////////
 
 
 //     if (dummyData.avengers.find(el => el.name === newAvenger.name) === undefined){
@@ -130,3 +174,4 @@ router.post('/insert', (req, res, next) => {
 
   // }
 // });
+

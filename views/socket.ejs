@@ -1,0 +1,21 @@
+    <div>
+        <input type="text" id="name" placeholder="Name">
+        <p id="error"></p>
+        <div>
+            <button id="add">Add</button>
+            <button id="remove">Remove</button>
+        </div>
+    </div>
+    <div id="list">
+        <% for (const name of names) { %>
+            <p id="<%= name %>">
+                <%= name %>
+            </p>
+            <% } %>
+    </div>
+
+<!-- Add the socket.io.js script here -->
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/socket.js"></script>
+
+<!-- <script src="index.js"></script> -->

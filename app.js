@@ -33,7 +33,12 @@ app.set('views', 'views');
     
     ////////////////////////////////////////////////////////////////////////////////////
     
+// const server = app.listen(PORT, () => console.log(`Listening on ${PORT}`))    
+// const io = require('socket.io')(server);
 const adminData = require('./routes/admin');
+
+
+    
 
 app.use('/admin', adminData.routes);
 // app.use(shopRoutes);
@@ -47,12 +52,36 @@ app.use((req, res, next) => {
     res.status(404).render('404', { pageTitle: 'Page Not Found' });
 });
 
-app.listen(PORT);
+// app.listen(PORT);
 
-// mongoose.connect(MONGODB_URI)
-// .then(result => {
-//   app.listen(PORT);
-// })
-// .catch(err => {
-//   console.log(err);
-// });
+const names = ["Ted", "Barney", "Robin", "Lily", "Marshall"];
+
+const server = app.listen(PORT);
+const io = require('./socket').init(server);
+io.on('connection', socket => {
+  console.log('Client connected');
+  socket.on('disconnect', () => {
+      console.log('Client disconnected');
+  })
+
+  socket.on('add', name => {
+    if (!names.find(n => n == name)) {
+        names.push(name);
+        io.emit('add', names);
+    }
+})
+
+// Listen for remove events
+socket.on('remove', name => {
+
+    for (let i = 0; i < names.length; i++){
+        if (names[i] === name){
+            names.splice(i, 1);
+        }
+    }
+
+    console.log(names);
+    io.emit('remove', names);
+})
+
+});
